@@ -1,0 +1,22 @@
+import { IDamage } from "../database/Damage";
+import { IDamageModel } from "../IDamageModel";
+import { IModelConverter } from "./modelConverter";
+
+export class DamageConverter implements IModelConverter<IDamageModel, IDamage> {
+  public convertToFrontend = (data: IDamage): IDamageModel => {
+    return {
+      damagedAreas: data.damagedAreas,
+      damagedAreasName: data.damagedAreasName,
+    };
+  }
+
+  public convertToBackend = (
+    model: IDamageModel,
+    existing?: IDamage | undefined,
+    modifier?: string): IDamage => {
+
+    throw new Error("Unsupported Write: IDamage");
+  }
+}
+
+export const damageConverter = new DamageConverter();

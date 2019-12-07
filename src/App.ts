@@ -8,8 +8,8 @@ import { connectSingletonDatabase } from "./infastructure/Database";
 import { corsMiddleware } from "./middleware/Cors";
 import { errorMiddleware } from "./middleware/Error";
 import { addJwtStrategy } from "./middleware/Passport";
-import { pingRouter } from "./routes/Ping";
 import { accidentRouter } from "./routes/Accident";
+import { pingRouter } from "./routes/Ping";
 import { swaggerRouter } from "./routes/Swagger";
 
 connectSingletonDatabase();

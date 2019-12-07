@@ -1,6 +1,6 @@
-import { Document } from "mongoose";
+import { Document, Types } from "mongoose";
 import { ITrackedEntity } from "../database/TrackedEntity";
-import { ITrackedEntityModel } from "../TrackedEntityModel";
+import { ITrackedEntityModel } from "../ITrackedEntityModel";
 
 export const setUserModifier = <TEntity extends ITrackedEntity>(entity: ITrackedEntity, modifier: string): TEntity => {
   if (!entity.id || !entity.createdBy) {
@@ -23,7 +23,7 @@ export const mapTrackedEntity = <TFrontend extends ITrackedEntityModel>(
   return toMap;
 };
 
-export interface IModelConverter<TFrontend extends object, TBackend extends Document> {
+export interface IModelConverter<TFrontend extends object, TBackend extends Document | Types.Subdocument> {
   convertToFrontend(model: TBackend): TFrontend;
   convertToBackend(model: TFrontend, existing?: TBackend, modifier?: string): TBackend;
 }

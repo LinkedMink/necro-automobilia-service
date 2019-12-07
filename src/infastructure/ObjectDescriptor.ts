@@ -13,7 +13,8 @@ export interface IObjectAttributeParams {
 
 export class ObjectDescriptor<TVerify> {
   constructor(
-    private descriptors: { [key: string]: Array<ObjectAttribute | IObjectAttributeParams>; }) {}
+    private descriptors: { [key: string]: Array<ObjectAttribute | IObjectAttributeParams>; },
+    private sanitizeFunc?: (toSanitize: TVerify) => TVerify) {}
 
   public verify = (toVerify: any): string[] | TVerify => {
     const errors: string[] = [];
@@ -39,20 +40,37 @@ export class ObjectDescriptor<TVerify> {
 
     return toVerify as TVerify;
   }
+
+  public sanitize = (toSanitize: TVerify) => {
+    if (this.sanitizeFunc) {
+      return this.sanitizeFunc(toSanitize);
+    }
+  }
 }
 
 export const objectDescriptorBodyVerify = <TVerify>(descriptor: ObjectDescriptor<TVerify>) => {
-  return (req: Request<ParamsDictionary, any, any>, res: Response, next: NextFunction) => {
-    if (!req.body) {
+  return (req: Request<ParamsDictionary, any, any>, res: Response, next: NextFunction, isInBody: true) => {
+    let data = req.body;
+    if (!isInBody) {
+      data = req.query;
+    }
+
+    if (!data) {
       res.status(400);
       return res.send(getResponseObject(ResponseStatus.Failed, "Empty Body"));
     }
 
-    const modelCheck = descriptor.verify(req.body);
+    const modelCheck = descriptor.verify(data);
     if ((modelCheck as string[]).length) {
       res.status(400);
       return res.send(getResponseObject(
         ResponseStatus.Failed, (modelCheck as string[]).join(" ")));
+    } else {
+      if (isInBody) {
+        req.body = descriptor.sanitize(modelCheck as TVerify);
+      } else {
+        req.query = descriptor.sanitize(modelCheck as TVerify);
+      }
     }
   };
 };

@@ -1,5 +1,7 @@
 import { ObjectAttribute, ObjectDescriptor } from "../../infastructure/objectDescriptor";
 
+const DEFAULT_ITEMS_PER_PAGE = 20;
+
 export enum SortOrder {
   Ascending = 0,
   Descending = 1,
@@ -17,10 +19,10 @@ export enum SortOrder {
  *         type: string
  */
 export interface ISearchRequest {
-  pageSize: number;
-  pageNumber: number;
-  sort: { [key: string]: SortOrder; };
-  query: { [key: string]: any; };
+  pageSize?: number;
+  pageNumber?: number;
+  sort?: { [key: string]: SortOrder; };
+  query?: { [key: string]: any; };
 }
 
 export const searchRequestDescriptor = new ObjectDescriptor<ISearchRequest>({

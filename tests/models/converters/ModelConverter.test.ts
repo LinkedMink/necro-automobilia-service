@@ -1,6 +1,6 @@
 import { mapTrackedEntity, setUserModifier } from "../../../src/models/converters/ModelConverter";
 import { ITrackedEntity } from "../../../src/models/database/TrackedEntity";
-import { ITrackedEntityModel } from "../../../src/models/TrackedEntityModel";
+import { ITrackedEntityModel } from "../../../src/models/ITrackedEntityModel";
 
 describe("modelConverter.ts", () => {
   test("mapTrackedEntity should return tracking info", async () => {

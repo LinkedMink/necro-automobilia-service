@@ -1,0 +1,30 @@
+export interface IPedestrianBicycleModel {
+  vehicleNumber?: number;
+  personNumber?: number;
+  personType?: number;
+  personTypeName?: string;
+  age?: number;
+  sex?: string;
+  markedCrosswalkPresent?: string;
+  sidewalkPresent?: string;
+  schoolZone?: string;
+  crashTypePedestrian?: number;
+  crashTypePedestrianName?: string;
+  crashTypeBicycle?: number;
+  crashTypeBicycleName?: string;
+  crashLocationPedestrian?: string;
+  crashLocationBicycle?: string;
+  pedestrianPosition?: string;
+  bicyclistPosition?: string;
+  pedestrianInitialDirectionOfTravel?: string;
+  bicyclistInitialDirectionOfTravel?: string;
+  motoristInitialDirectionOfTravel?: string;
+  motoristManeuver?: string;
+  intersectionLeg?: string;
+  pedestrianScenario?: string;
+  pedestrianScenarioName?: string;
+  crashGroupPedestrian?: number;
+  crashGroupPedestrianName?: string;
+  crashGroupBicycle?: number;
+  crashGroupBicycleName?: string;
+}

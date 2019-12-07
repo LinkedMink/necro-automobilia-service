@@ -1,13 +1,15 @@
 import { Router } from "express";
 import { ParamsDictionary, Request, Response } from "express-serve-static-core";
 
-import { Document, Model } from "mongoose";
+import { Document, DocumentQuery, Model } from "mongoose";
 import { authorizeJwtClaim } from "../middleware/Authorization";
 import { IJwtPayload } from "../middleware/Passport";
 import { IModelConverter } from "../models/converters/ModelConverter";
-import { searchRequestDescriptor } from "../models/requests/ISearchRequest";
+import { ISearchRequest, searchRequestDescriptor } from "../models/requests/ISearchRequest";
 import { getResponseObject, ResponseStatus } from "../models/Response";
 import { objectDescriptorBodyVerify } from "./ObjectDescriptor";
+
+const DEFAULT_ITEMS_PER_PAGE = 20;
 
 export const createCrudRouter = <TFrontend extends object, TBackend extends Document>(
   model: Model<TBackend, {}>,
@@ -20,19 +22,27 @@ export const createCrudRouter = <TFrontend extends object, TBackend extends Docu
   const getEntityListHandlers: any[] = [
     objectDescriptorBodyVerify(searchRequestDescriptor),
     async (req: Request<ParamsDictionary, any, any>, res: Response) => {
-      const itemsPerPage = 20;
-      const page = Number(req.query.page);
-      if (page && (Number.isNaN(page) || !Number.isInteger(page) || page < 0)) {
-        res.status(400);
-        return res.send(getResponseObject(ResponseStatus.Failed, `page: must be an integer 0 or greater`));
+      const reqData = req.query as ISearchRequest;
+
+      let query: DocumentQuery<TBackend[], TBackend, {}>;
+      if (reqData.query) {
+        query = model.find(reqData.query);
+      } else {
+        query = model.find();
       }
 
-      const query = model.find().limit(itemsPerPage);
-      if (page) {
-        query.skip(itemsPerPage * page);
+      if (reqData.sort) {
+        query = query.sort(reqData.sort);
       }
+
+      const itemsPerPage = reqData.pageSize ? reqData.pageSize : DEFAULT_ITEMS_PER_PAGE;
+      query = query.limit(itemsPerPage);
+
+      if (reqData.pageNumber) {
+        query = query.skip(itemsPerPage * reqData.pageNumber);
+      }
+
       const result = await query.exec();
-
       const responseData = result.map(async (e) => {
         return modelConverter.convertToFrontend(e);
       });
@@ -124,16 +134,15 @@ export const createCrudRouter = <TFrontend extends object, TBackend extends Docu
     getEntityListHandlers.unshift(authorizeRead);
     getEntityHandlers.unshift(authorizeRead);
 
-  }
+    const authorizeWrite = requiredClaimWrite
+      ? authorizeJwtClaim([requiredClaimWrite])
+      : authorizeRead;
 
-  if (requiredClaimWrite) {
-    const authorizeWrite = authorizeJwtClaim([requiredClaimWrite]);
     addEntityHandlers.unshift(authorizeWrite);
     updateEntityHandlers.unshift(authorizeWrite);
     deleteEntityHandlers.unshift(authorizeWrite);
   }
 
-  // TODO improve list query
   router.get("/", getEntityListHandlers);
   router.get("/:entityId", getEntityHandlers);
   router.post("/", addEntityHandlers);

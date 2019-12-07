@@ -10,7 +10,7 @@ import { IPedestrianBicycle, pedestrianBicycleSchema } from "./PedestrianBicycle
 import { IPerson, personSchema } from "./Person";
 import { IPoint, pointSchema } from "./Point";
 import { IVehicleCrash, vehicleCrashSchema } from "./VehicleCrash";
-import { IVehicleDetail, vehicleDetailSchema } from "./VehicleDetails";
+import { IVehicleDetail, vehicleDetailSchema } from "./VehicleDetail";
 import { IVehicleEvent, vehicleEventSchema } from "./VehicleEvent";
 
 const accidentSchema = new Schema({
@@ -47,10 +47,6 @@ const accidentSchema = new Schema({
   trafficwayIdentifier: { type: SchemaTypes.String },
   trafficwayIdentifier2: { type: SchemaTypes.String },
   milepoint: { type: SchemaTypes.Number },
-  /*
-  latitude: { type: SchemaTypes.Number },
-  longitude: { type: SchemaTypes.Number },
-  */
   location: {
     type: pointSchema,
     index: { type: "2dsphere" },
@@ -145,10 +141,6 @@ export interface IAccident extends Document {
   trafficwayIdentifier?: string;
   trafficwayIdentifier2?: string;
   milepoint?: number;
-  /*
-  latitude?: number;
-  longitude?: number;
-  */
   location?: IPoint;
   specialJurisdiction?: number;
   specialJurisdictionName?: string;
