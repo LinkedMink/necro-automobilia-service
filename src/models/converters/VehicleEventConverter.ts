@@ -1,6 +1,6 @@
 import { IVehicleEvent } from "../database/VehicleEvent";
 import { IVehicleEventModel } from "../IVehicleEventModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class VehicleEventConverter implements IModelConverter<IVehicleEventModel, IVehicleEvent> {
   public convertToFrontend = (data: IVehicleEvent): IVehicleEventModel => {

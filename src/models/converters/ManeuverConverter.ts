@@ -1,6 +1,6 @@
 import { IManeuver } from "../database/Maneuver";
 import { IManeuverModel } from "../IManeuverModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class ManeuverConverter implements IModelConverter<IManeuverModel, IManeuver> {
   public convertToFrontend = (data: IManeuver): IManeuverModel => {

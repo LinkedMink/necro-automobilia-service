@@ -1,6 +1,6 @@
 import { IPoint } from "../database/Point";
 import { IPointModel } from "../IPointModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class PointConverter implements IModelConverter<IPointModel, IPoint> {
   public convertToFrontend = (data: IPoint): IPointModel => {

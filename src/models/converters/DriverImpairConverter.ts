@@ -1,6 +1,6 @@
 import { IDriverImpair } from "../database/DriverImpair";
 import { IDriverImpairModel } from "../IDriverImpairModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class DriverImpairConverter implements IModelConverter<IDriverImpairModel, IDriverImpair> {
   public convertToFrontend = (data: IDriverImpair): IDriverImpairModel => {

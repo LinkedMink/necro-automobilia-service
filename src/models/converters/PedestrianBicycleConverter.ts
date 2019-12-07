@@ -1,6 +1,6 @@
 import { IPedestrianBicycle } from "../database/PedestrianBicycle";
 import { IPedestrianBicycleModel } from "../IPedestrianBicycleModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class PedestrianBicycleConverter implements IModelConverter<IPedestrianBicycleModel, IPedestrianBicycle> {
   public convertToFrontend = (data: IPedestrianBicycle): IPedestrianBicycleModel => {

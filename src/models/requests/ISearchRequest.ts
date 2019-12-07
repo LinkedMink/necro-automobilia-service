@@ -1,4 +1,4 @@
-import { ObjectAttribute, ObjectDescriptor } from "../../infastructure/objectDescriptor";
+import { ObjectAttribute, ObjectDescriptor } from "../../infastructure/ObjectDescriptor";
 
 const DEFAULT_ITEMS_PER_PAGE = 20;
 

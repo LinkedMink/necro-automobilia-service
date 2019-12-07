@@ -1,6 +1,6 @@
 import { INonMotoristSafetyEquipment } from "../database/NonMotoristSafetyEquipment";
 import { INonMotoristSafetyEquipmentModel } from "../INonMotoristSafetyEquipmentModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class NonMotoristSafetyEquipmentConverter
   implements IModelConverter<INonMotoristSafetyEquipmentModel, INonMotoristSafetyEquipment> {

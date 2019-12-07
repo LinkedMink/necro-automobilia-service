@@ -1,6 +1,6 @@
 import { ICrashEvent } from "../database/CrashEvent";
 import { ICrashEventModel } from "../ICrashEventModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class CrashEventConverter implements IModelConverter<ICrashEventModel, ICrashEvent> {
   public convertToFrontend = (data: ICrashEvent): ICrashEventModel => {

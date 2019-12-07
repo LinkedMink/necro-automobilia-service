@@ -1,6 +1,6 @@
 import { IDamage } from "../database/Damage";
 import { IDamageModel } from "../IDamageModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class DamageConverter implements IModelConverter<IDamageModel, IDamage> {
   public convertToFrontend = (data: IDamage): IDamageModel => {

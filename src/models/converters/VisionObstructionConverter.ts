@@ -1,6 +1,6 @@
 import { IVisionObstruction } from "../database/VisionObstruction";
 import { IVisionObstructionModel } from "../IVisionObstructionModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class VisionObstructionConverter implements IModelConverter<IVisionObstructionModel, IVisionObstruction> {
   public convertToFrontend = (data: IVisionObstruction): IVisionObstructionModel => {

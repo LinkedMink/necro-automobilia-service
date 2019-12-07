@@ -1,4 +1,5 @@
 import { NextFunction, ParamsDictionary, Request, Response } from "express-serve-static-core";
+
 import { getResponseObject, ResponseStatus } from "../models/Response";
 
 export enum ObjectAttribute {

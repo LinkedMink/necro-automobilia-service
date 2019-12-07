@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 import { config, ConfigKey } from "./Config";
-import { logger } from "./logger";
+import { logger } from "./Logger";
 
 const RECONNECT_TRIES = 60;
 const RECONNECT_INTERVAL = 1000;

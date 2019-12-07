@@ -1,6 +1,6 @@
 import { IDistraction } from "../database/Distraction";
 import { IDistractionModel } from "../IDistractionModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class DistractionConverter implements IModelConverter<IDistractionModel, IDistraction> {
   public convertToFrontend = (data: IDistraction): IDistractionModel => {

@@ -12,7 +12,7 @@ import { IVehicleDetail } from "../database/VehicleDetail";
 import { IVehicleEvent } from "../database/VehicleEvent";
 import { IAccidentModel } from "../IAccidentModel";
 import { crashEventConverter } from "./CrashEventConverter";
-import { IModelConverter } from "./ModelConverter";
+import { IModelConverter } from "./IModelConverter";
 import { nonMotoristCrashConverter } from "./NonMotoristCrashConverter";
 import { nonMotoristImpairConverter } from "./NonMotoristImpairConverter";
 import { nonMotoristPriorConverter } from "./NonMotoristPriorConverter";

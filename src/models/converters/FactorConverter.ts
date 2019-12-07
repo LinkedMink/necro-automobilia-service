@@ -1,6 +1,6 @@
 import { IFactor } from "../database/Factor";
 import { IFactorModel } from "../IFactorModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class FactorConverter implements IModelConverter<IFactorModel, IFactor> {
   public convertToFrontend = (data: IFactor): IFactorModel => {

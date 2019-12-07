@@ -1,6 +1,6 @@
 import { IParkWorkVehicle } from "../database/ParkWorkVehicle";
 import { IParkWorkVehicleModel } from "../IParkWorkVehicleModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class ParkWorkVehicleConverter implements IModelConverter<IParkWorkVehicleModel, IParkWorkVehicle> {
   public convertToFrontend = (data: IParkWorkVehicle): IParkWorkVehicleModel => {

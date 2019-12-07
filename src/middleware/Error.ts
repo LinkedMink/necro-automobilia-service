@@ -1,6 +1,6 @@
-import { logger } from "../infastructure/logger";
+import { logger } from "../infastructure/Logger";
 import { getResponseObject, ResponseStatus } from "../models/Response";
-import { CORS_ERROR } from "./cors";
+import { CORS_ERROR } from "./Cors";
 
 export const errorMiddleware = (error: any, req: any, res: any, next: any) => {
   if (error && error.stack) {

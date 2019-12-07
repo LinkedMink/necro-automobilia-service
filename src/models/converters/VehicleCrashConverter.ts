@@ -5,7 +5,7 @@ import { distractionConverter } from "./DistractionConverter";
 import { driverImpairConverter } from "./DriverImpairConverter";
 import { factorConverter } from "./FactorConverter";
 import { maneuverConverter } from "./ManeuverConverter";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 import { violationConverter } from "./ViolationConverter";
 import { visionObstructionConverter } from "./VisionObstructionConverter";
 

@@ -1,4 +1,4 @@
-import { mapTrackedEntity, setUserModifier } from "../../../src/models/converters/ModelConverter";
+import { mapTrackedEntity, setUserModifier } from "../../../src/models/converters/IModelConverter";
 import { ITrackedEntity } from "../../../src/models/database/TrackedEntity";
 import { ITrackedEntityModel } from "../../../src/models/ITrackedEntityModel";
 

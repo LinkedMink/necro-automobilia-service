@@ -1,6 +1,6 @@
 import { INonMotoristImpair } from "../database/NonMotoristImpair";
 import { INonMotoristImpairModel } from "../INonMotoristImpairModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class NonMotoristImpairConverter implements IModelConverter<INonMotoristImpairModel, INonMotoristImpair> {
   public convertToFrontend = (data: INonMotoristImpair): INonMotoristImpairModel => {

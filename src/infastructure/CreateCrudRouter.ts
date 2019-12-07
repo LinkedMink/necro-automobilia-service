@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { ParamsDictionary, Request, Response } from "express-serve-static-core";
-
 import { Document, DocumentQuery, Model } from "mongoose";
+
 import { authorizeJwtClaim } from "../middleware/Authorization";
 import { IJwtPayload } from "../middleware/Passport";
-import { IModelConverter } from "../models/converters/ModelConverter";
+import { IModelConverter } from "../models/converters/IModelConverter";
 import { ISearchRequest, searchRequestDescriptor } from "../models/requests/ISearchRequest";
 import { getResponseObject, ResponseStatus } from "../models/Response";
 import { objectDescriptorBodyVerify } from "./ObjectDescriptor";

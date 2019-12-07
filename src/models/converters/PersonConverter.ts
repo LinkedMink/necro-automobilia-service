@@ -1,6 +1,6 @@
 import { IPerson } from "../database/Person";
 import { IPersonModel } from "../IPersonModel";
-import { IModelConverter } from "./modelConverter";
+import { IModelConverter } from "./IModelConverter";
 
 export class PersonConverter implements IModelConverter<IPersonModel, IPerson> {
   public convertToFrontend = (data: IPerson): IPersonModel => {
