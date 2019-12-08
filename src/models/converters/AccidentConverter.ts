@@ -27,7 +27,7 @@ import { vehicleEventConverter } from "./VehicleEventConverter";
 
 export class AccidentConverter implements IModelConverter<IAccidentModel, IAccident> {
   public convertToFrontend = (data: IAccident): IAccidentModel => {
-    return {
+    const accident: IAccidentModel = {
       consecutiveNumber: data.consecutiveNumber,
       stateNumber: data.stateNumber,
       stateName: data.stateName,
@@ -102,29 +102,43 @@ export class AccidentConverter implements IModelConverter<IAccidentModel, IAccid
       numberOfDrunkDrivers: data.numberOfDrunkDrivers,
       timestampOfCrash: data.timestampOfCrash,
 
-      crashEvents: data.crashEvents.map(
-        (e: ICrashEvent) => crashEventConverter.convertToFrontend(e)),
-      nonMotoristsCrash: data.nonMotoristsCrash.map(
-        (e: INonMotoristCrash) => nonMotoristCrashConverter.convertToFrontend(e)),
-      nonMotoristsImpair: data.nonMotoristsImpair.map(
-        (e: INonMotoristImpair) => nonMotoristImpairConverter.convertToFrontend(e)),
-      nonMotoristsPrior: data.nonMotoristsPrior.map(
-        (e: INonMotoristPrior) => nonMotoristPriorConverter.convertToFrontend(e)),
-      nonMotoristsSafetyEquipment: data.nonMotoristsSafetyEquipment.map(
-        (e: INonMotoristSafetyEquipment) => nonMotoristSafetyEquipmentConverter.convertToFrontend(e)),
-      parkWorkVehicles: data.parkWorkVehicles.map(
-        (e: IParkWorkVehicle) => parkWorkVehicleConverter.convertToFrontend(e)),
-      pedestrianBicycles: data.pedestrianBicycles.map(
-        (e: IPedestrianBicycle) => pedestrianBicycleConverter.convertToFrontend(e)),
-      persons: data.persons.map(
-        (e: IPerson) => personConverter.convertToFrontend(e)),
-      vehicleCrashs: data.vehicleCrashs.map(
-        (e: IVehicleCrash) => vehicleCrashConverter.convertToFrontend(e)),
-      vehicleDetails: data.vehicleDetails.map(
-        (e: IVehicleDetail) => vehicleDetailConverter.convertToFrontend(e)),
-      vehicleEvents: data.vehicleEvents.map(
-        (e: IVehicleEvent) => vehicleEventConverter.convertToFrontend(e)),
+      crashEvents: [],
+      nonMotoristsCrash: [],
+      nonMotoristsImpair: [],
+      nonMotoristsPrior: [],
+      nonMotoristsSafetyEquipment: [],
+      parkWorkVehicles: [],
+      pedestrianBicycles: [],
+      persons: [],
+      vehicleCrashs: [],
+      vehicleDetails: [],
+      vehicleEvents: [],
     };
+
+    data.crashEvents.forEach(
+      (e) => data.crashEvents.push(crashEventConverter.convertToFrontend(e)));
+    data.nonMotoristsCrash.forEach(
+      (e) => data.nonMotoristsCrash.push(nonMotoristCrashConverter.convertToFrontend(e)));
+    data.nonMotoristsImpair.forEach(
+      (e) => data.nonMotoristsImpair.push(nonMotoristImpairConverter.convertToFrontend(e)));
+    data.nonMotoristsPrior.forEach(
+      (e) => data.nonMotoristsPrior.push(nonMotoristPriorConverter.convertToFrontend(e)));
+    data.nonMotoristsSafetyEquipment.forEach(
+      (e) => data.nonMotoristsSafetyEquipment.push(nonMotoristSafetyEquipmentConverter.convertToFrontend(e)));
+    data.parkWorkVehicles.forEach(
+      (e) => data.parkWorkVehicles.push(parkWorkVehicleConverter.convertToFrontend(e)));
+    data.pedestrianBicycles.forEach(
+      (e) => data.pedestrianBicycles.push(pedestrianBicycleConverter.convertToFrontend(e)));
+    data.persons.forEach(
+      (e) => data.persons.push(personConverter.convertToFrontend(e))),
+    data.vehicleCrashs.forEach(
+      (e) => data.vehicleCrashs.push(vehicleCrashConverter.convertToFrontend(e)));
+    data.vehicleDetails.forEach(
+      (e) => data.vehicleDetails.push(vehicleDetailConverter.convertToFrontend(e)));
+    data.vehicleEvents.forEach(
+      (e) => data.vehicleEvents.push(vehicleEventConverter.convertToFrontend(e)));
+
+    return accident;
   }
 
   public convertToBackend = (

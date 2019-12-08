@@ -4,14 +4,14 @@ import { damageConverter } from "./DamageConverter";
 import { distractionConverter } from "./DistractionConverter";
 import { driverImpairConverter } from "./DriverImpairConverter";
 import { factorConverter } from "./FactorConverter";
-import { maneuverConverter } from "./ManeuverConverter";
 import { IModelConverter } from "./IModelConverter";
+import { maneuverConverter } from "./ManeuverConverter";
 import { violationConverter } from "./ViolationConverter";
 import { visionObstructionConverter } from "./VisionObstructionConverter";
 
 export class VehicleCrashConverter implements IModelConverter<IVehicleCrashModel, IVehicleCrash> {
   public convertToFrontend = (data: IVehicleCrash): IVehicleCrashModel => {
-    return {
+    const vehicleCrash: IVehicleCrashModel = {
       vehicleNumber: data.vehicleNumber,
       numberOfMotorVehiclesInTransportMvit: data.numberOfMotorVehiclesInTransportMvit,
       numberOfOccupants: data.numberOfOccupants,
@@ -114,21 +114,31 @@ export class VehicleCrashConverter implements IModelConverter<IVehicleCrashModel
       driverDrinking: data.driverDrinking,
       timestampOfCrash: data.timestampOfCrash,
 
-      damages: data.damages.map(
-        (e) => damageConverter.convertToFrontend(e)),
-      distractions: data.distractions.map(
-        (e) => distractionConverter.convertToFrontend(e)),
-      driversImpair: data.driversImpair.map(
-        (e) => driverImpairConverter.convertToFrontend(e)),
-      factors: data.factors.map(
-        (e) => factorConverter.convertToFrontend(e)),
-      maneuvers: data.maneuvers.map(
-        (e) => maneuverConverter.convertToFrontend(e)),
-      violations: data.violations.map(
-        (e) => violationConverter.convertToFrontend(e)),
-      visionObstructions: data.visionObstructions.map(
-        (e) => visionObstructionConverter.convertToFrontend(e)),
+      damages: [],
+      distractions: [],
+      driversImpair: [],
+      factors: [],
+      maneuvers: [],
+      violations: [],
+      visionObstructions: [],
     };
+
+    data.damages.forEach(
+      (e) => vehicleCrash.damages.push(damageConverter.convertToFrontend(e)));
+    data.distractions.forEach(
+      (e) => vehicleCrash.distractions.push(distractionConverter.convertToFrontend(e)));
+    data.driversImpair.forEach(
+      (e) => vehicleCrash.driversImpair.push(driverImpairConverter.convertToFrontend(e)));
+    data.factors.forEach(
+      (e) => vehicleCrash.factors.push(factorConverter.convertToFrontend(e)));
+    data.maneuvers.forEach(
+      (e) => vehicleCrash.maneuvers.push(maneuverConverter.convertToFrontend(e)));
+    data.violations.forEach(
+      (e) => vehicleCrash.violations.push( violationConverter.convertToFrontend(e)));
+    data.visionObstructions.forEach(
+      (e) => vehicleCrash.visionObstructions.push(visionObstructionConverter.convertToFrontend(e)));
+
+    return vehicleCrash;
   }
 
   public convertToBackend = (

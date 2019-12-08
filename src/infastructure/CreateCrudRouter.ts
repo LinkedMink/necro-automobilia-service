@@ -43,7 +43,7 @@ export const createCrudRouter = <TFrontend extends object, TBackend extends Docu
       }
 
       const result = await query.exec();
-      const responseData = result.map(async (e) => {
+      const responseData = result.map((e) => {
         return modelConverter.convertToFrontend(e);
       });
 

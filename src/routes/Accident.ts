@@ -5,9 +5,7 @@ import { AuthorizationClaim, authorizeJwtClaim } from "../middleware/Authorizati
 import { accidentConverter } from "../models/converters/AccidentConverter";
 import { Accident } from "../models/database/Accident";
 
-export const accidentRouter = Router();
-
-export const claimRouter = createCrudRouter(
+export const accidentRouter = createCrudRouter(
   Accident,
   accidentConverter,
   AuthorizationClaim.NecroAutomobiliaUser,
