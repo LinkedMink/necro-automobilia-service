@@ -20,7 +20,7 @@ export const createCrudRouter = <TFrontend extends object, TBackend extends Docu
   const router = Router();
 
   const getEntityListHandlers: any[] = [
-    objectDescriptorBodyVerify(searchRequestDescriptor),
+    objectDescriptorBodyVerify(searchRequestDescriptor, false),
     async (req: Request<ParamsDictionary, any, any>, res: Response) => {
       const reqData = req.query as ISearchRequest;
 

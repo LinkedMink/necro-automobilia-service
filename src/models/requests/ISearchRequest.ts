@@ -28,4 +28,18 @@ export interface ISearchRequest {
 export const searchRequestDescriptor = new ObjectDescriptor<ISearchRequest>({
   pageSize: [ObjectAttribute.Range, 1, 100],
   pageNumber: [ObjectAttribute.Range, 0],
+}, (toSanitize) => {
+  if (toSanitize.pageSize) {
+    toSanitize.pageSize = Number(toSanitize.pageSize);
+  }
+  if (toSanitize.pageSize) {
+    toSanitize.pageNumber = Number(toSanitize.pageNumber);
+  }
+  if (toSanitize.sort) {
+    toSanitize.sort = JSON.parse(toSanitize.sort as unknown as string);
+  }
+  if (toSanitize.query) {
+    toSanitize.query = JSON.parse(toSanitize.query as unknown as string);
+  }
+  return toSanitize;
 });

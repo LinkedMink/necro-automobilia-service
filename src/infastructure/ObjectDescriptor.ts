@@ -49,8 +49,10 @@ export class ObjectDescriptor<TVerify> {
   }
 }
 
-export const objectDescriptorBodyVerify = <TVerify>(descriptor: ObjectDescriptor<TVerify>) => {
-  return (req: Request<ParamsDictionary, any, any>, res: Response, next: NextFunction, isInBody: true) => {
+export const objectDescriptorBodyVerify = <TVerify>(
+  descriptor: ObjectDescriptor<TVerify>,
+  isInBody: boolean = true) => {
+  return (req: Request<ParamsDictionary, any, any>, res: Response, next: NextFunction) => {
     let data = req.body;
     if (!isInBody) {
       data = req.query;
@@ -73,5 +75,7 @@ export const objectDescriptorBodyVerify = <TVerify>(descriptor: ObjectDescriptor
         req.query = descriptor.sanitize(modelCheck as TVerify);
       }
     }
+
+    next();
   };
 };
