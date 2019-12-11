@@ -3,6 +3,7 @@ import { ParamsDictionary, Request, Response } from "express-serve-static-core";
 import { Document, DocumentQuery, Model } from "mongoose";
 
 import { authorizeJwtClaim } from "../middleware/Authorization";
+import { UserInputError } from "../middleware/Error";
 import { IJwtPayload } from "../middleware/Passport";
 import { IModelConverter } from "../models/converters/IModelConverter";
 import { ISearchRequest, searchRequestDescriptor } from "../models/requests/ISearchRequest";
@@ -26,13 +27,23 @@ export const createCrudRouter = <TFrontend extends object, TBackend extends Docu
 
       let query: DocumentQuery<TBackend[], TBackend, {}>;
       if (reqData.query) {
-        query = model.find(reqData.query);
+        try {
+          query = model.find(reqData.query);
+        } catch (e) {
+          res.status(400);
+          return res.send(getResponseObject(ResponseStatus.Failed, "The supplied query is invalid"));
+        }
       } else {
         query = model.find();
       }
 
       if (reqData.sort) {
-        query = query.sort(reqData.sort);
+        try {
+          query = query.sort(reqData.sort);
+        } catch (e) {
+          res.status(400);
+          return res.send(getResponseObject(ResponseStatus.Failed, "The supplied sort is invalid"));
+        }
       }
 
       const itemsPerPage = reqData.pageSize ? reqData.pageSize : DEFAULT_ITEMS_PER_PAGE;
