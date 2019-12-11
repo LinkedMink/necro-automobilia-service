@@ -26,9 +26,15 @@ export interface ISearchRequest {
 }
 
 export const searchRequestDescriptor = new ObjectDescriptor<ISearchRequest>({
-  pageSize: [ObjectAttribute.Range, 1, 100],
-  pageNumber: [ObjectAttribute.Range, 0],
-}, (toSanitize) => {
+  pageSize: [{
+    value: ObjectAttribute.Range,
+    params: { min: 1, max: 100 },
+  }],
+  pageNumber: [{
+    value: ObjectAttribute.Range,
+    params: { min: 0 },
+  }],
+}, (toSanitize: ISearchRequest) => {
   if (toSanitize.pageSize) {
     toSanitize.pageSize = Number(toSanitize.pageSize);
   }

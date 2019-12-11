@@ -27,16 +27,22 @@ export class ObjectDescriptor<TVerify> {
         } else {
           const complex = (attribute as IObjectAttributeParams);
           if (complex.value === ObjectAttribute.Range) {
-            if (complex.params.min && toVerify[property] < complex.params.min) {
+            if (complex.params.min !== undefined &&
+              Number(toVerify[property]) < complex.params.min) {
               errors.push(`${property}: must be greater than ${complex.params.min}`);
             }
 
-            if (complex.params.max && toVerify[property] > complex.params.max) {
+            if (complex.params.max !== undefined &&
+              Number(toVerify[property]) > complex.params.max) {
               errors.push(`${property}: must be less than ${complex.params.max}`);
             }
           }
         }
       });
+    }
+
+    if (errors.length > 0) {
+      return errors;
     }
 
     return toVerify as TVerify;
