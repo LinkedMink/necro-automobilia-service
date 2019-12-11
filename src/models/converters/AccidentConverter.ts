@@ -116,27 +116,27 @@ export class AccidentConverter implements IModelConverter<IAccidentModel, IAccid
     };
 
     data.crashEvents.forEach(
-      (e) => data.crashEvents.push(crashEventConverter.convertToFrontend(e)));
+      (e) => accident.crashEvents.push(crashEventConverter.convertToFrontend(e)));
     data.nonMotoristsCrash.forEach(
-      (e) => data.nonMotoristsCrash.push(nonMotoristCrashConverter.convertToFrontend(e)));
+      (e) => accident.nonMotoristsCrash.push(nonMotoristCrashConverter.convertToFrontend(e)));
     data.nonMotoristsImpair.forEach(
-      (e) => data.nonMotoristsImpair.push(nonMotoristImpairConverter.convertToFrontend(e)));
+      (e) => accident.nonMotoristsImpair.push(nonMotoristImpairConverter.convertToFrontend(e)));
     data.nonMotoristsPrior.forEach(
-      (e) => data.nonMotoristsPrior.push(nonMotoristPriorConverter.convertToFrontend(e)));
+      (e) => accident.nonMotoristsPrior.push(nonMotoristPriorConverter.convertToFrontend(e)));
     data.nonMotoristsSafetyEquipment.forEach(
-      (e) => data.nonMotoristsSafetyEquipment.push(nonMotoristSafetyEquipmentConverter.convertToFrontend(e)));
+      (e) => accident.nonMotoristsSafetyEquipment.push(nonMotoristSafetyEquipmentConverter.convertToFrontend(e)));
     data.parkWorkVehicles.forEach(
-      (e) => data.parkWorkVehicles.push(parkWorkVehicleConverter.convertToFrontend(e)));
+      (e) => accident.parkWorkVehicles.push(parkWorkVehicleConverter.convertToFrontend(e)));
     data.pedestrianBicycles.forEach(
-      (e) => data.pedestrianBicycles.push(pedestrianBicycleConverter.convertToFrontend(e)));
+      (e) => accident.pedestrianBicycles.push(pedestrianBicycleConverter.convertToFrontend(e)));
     data.persons.forEach(
-      (e) => data.persons.push(personConverter.convertToFrontend(e))),
+      (e) => accident.persons.push(personConverter.convertToFrontend(e))),
     data.vehicleCrashs.forEach(
-      (e) => data.vehicleCrashs.push(vehicleCrashConverter.convertToFrontend(e)));
+      (e) => accident.vehicleCrashs.push(vehicleCrashConverter.convertToFrontend(e)));
     data.vehicleDetails.forEach(
-      (e) => data.vehicleDetails.push(vehicleDetailConverter.convertToFrontend(e)));
+      (e) => accident.vehicleDetails.push(vehicleDetailConverter.convertToFrontend(e)));
     data.vehicleEvents.forEach(
-      (e) => data.vehicleEvents.push(vehicleEventConverter.convertToFrontend(e)));
+      (e) => accident.vehicleEvents.push(vehicleEventConverter.convertToFrontend(e)));
 
     return accident;
   }
