@@ -1,7 +1,7 @@
 import { NextFunction, ParamsDictionary, Request, Response } from "express-serve-static-core";
 import passport from "passport";
 
-import { getResponseObject, ResponseStatus } from "../models/Response";
+import { getResponseObject, ResponseStatus } from "../models/IResponseData";
 import { IJwtPayload } from "./Passport";
 
 const GENERIC_AUTH_ERROR = "Not Authorized";
