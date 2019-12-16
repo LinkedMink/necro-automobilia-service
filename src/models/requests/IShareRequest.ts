@@ -14,18 +14,18 @@ import { ObjectAttribute, ObjectDescriptor } from "../../infastructure/ObjectDes
  *       - source
  *       - destination
  */
-export interface IRouteRequest {
+export interface IShareRequest {
   source: number[];
   destination: number[];
 }
 
-export const routeRequestDescriptor = new ObjectDescriptor<IRouteRequest>(
+export const shareRequestDescriptor = new ObjectDescriptor<IShareRequest>(
   {
     source: [ObjectAttribute.Required],
     destination: [ObjectAttribute.Required],
   },
   false,
-  (toSanitize: IRouteRequest) => {
+  (toSanitize: IShareRequest) => {
     if (toSanitize.source) {
       toSanitize.source = JSON.parse(toSanitize.source as unknown as string);
     }

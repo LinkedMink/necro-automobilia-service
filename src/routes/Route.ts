@@ -11,18 +11,21 @@ import { IRouteRequest, routeRequestDescriptor } from "../models/requests/IRoute
 export const routeRouter = Router();
 
 const getMockResponse = (reqData: IRouteRequest): IRouteRiskModel => {
+  const distance = (Math.random() * 100);
+  const micromortsPerUnit = (Math.random() / 5) + 1 / 10000;
   return {
     source: reqData.source,
     destination: reqData.destination,
-    distance: (Math.random() * 100),
-    averageMicromorts: (Math.random() / 5) + 1 / 10000,
+    distance,
+    totalMicromorts: micromortsPerUnit * distance,
+    averageMicromorts: micromortsPerUnit,
     modelCalculatedOn: new Date(),
   };
 };
 
 /**
  * @swagger
- * /route:
+ * /routes:
  *   get:
  *     description: Send a request to retrieve the risk profile fro a route
  *     tags: [Route]

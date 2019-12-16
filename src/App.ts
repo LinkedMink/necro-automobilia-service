@@ -12,6 +12,8 @@ import { accidentRouter } from "./routes/Accident";
 import { feedEventRouter } from "./routes/FeedEvent";
 import { pingRouter } from "./routes/Ping";
 import { routeRouter } from "./routes/Route";
+import { shareRouter } from "./routes/Share";
+import { shareEventRouter } from "./routes/ShareEvent";
 import { swaggerRouter } from "./routes/Swagger";
 
 connectSingletonDatabase();
@@ -29,8 +31,10 @@ app.use(errorMiddleware);
 
 app.use("/ping", pingRouter);
 app.use("/accidents", accidentRouter);
-app.use("/feed-event", feedEventRouter);
-app.use("/route", routeRouter);
+app.use("/feed-events", feedEventRouter);
+app.use("/share-events", shareEventRouter);
+app.use("/routes", routeRouter);
+app.use("/shares", shareRouter);
 
 if (process.env.NODE_ENV !== Environment.Production) {
   app.use("/docs", swaggerRouter);
