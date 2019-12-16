@@ -1,15 +1,4 @@
 import { IAccident } from "../database/Accident";
-import { ICrashEvent } from "../database/CrashEvent";
-import { INonMotoristCrash } from "../database/NonMotoristCrash";
-import { INonMotoristImpair } from "../database/NonMotoristImpair";
-import { INonMotoristPrior } from "../database/NonMotoristPrior";
-import { INonMotoristSafetyEquipment } from "../database/NonMotoristSafetyEquipment";
-import { IParkWorkVehicle } from "../database/ParkWorkVehicle";
-import { IPedestrianBicycle } from "../database/PedestrianBicycle";
-import { IPerson } from "../database/Person";
-import { IVehicleCrash } from "../database/VehicleCrash";
-import { IVehicleDetail } from "../database/VehicleDetail";
-import { IVehicleEvent } from "../database/VehicleEvent";
 import { IAccidentModel } from "../IAccidentModel";
 import { crashEventConverter } from "./CrashEventConverter";
 import { IModelConverter } from "./IModelConverter";
@@ -28,6 +17,7 @@ import { vehicleEventConverter } from "./VehicleEventConverter";
 export class AccidentConverter implements IModelConverter<IAccidentModel, IAccident> {
   public convertToFrontend = (data: IAccident): IAccidentModel => {
     const accident: IAccidentModel = {
+      id: data.id,
       consecutiveNumber: data.consecutiveNumber,
       stateNumber: data.stateNumber,
       stateName: data.stateName,

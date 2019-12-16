@@ -1,4 +1,14 @@
 # Necro Automobilia Service
+## Project Overview
+This apps seeks to assign a mortality rating to driving a vehicle for to any particular location in 
+the United States (see [Micromorts](https://en.wikipedia.org/wiki/Micromort)). The application uses 
+a machine learning algorithm to produce a plane of predicted risk. This risk is then used to 
+calculate the risk or routes or locations.
+
+### Data Sources
+Currently, the application uses historical data from the NHTSA to calculate risk. There are plans 
+to produce a model that evolves with conditions (weather, traffic, etc.) that will adjust at regular 
+intervals, so people can compare there risk over time.
 
 ## Microservice Collection
 This project is part of a collection of microservices for supporting a larger project.

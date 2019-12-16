@@ -12,6 +12,7 @@ import { IVehicleDetailModel } from "./IVehicleDetailModel";
 import { IVehicleEventModel } from "./IVehicleEventModel";
 
 export interface IAccidentModel {
+  id?: string;
   consecutiveNumber?: number;
   stateNumber?: number;
   stateName?: string;
