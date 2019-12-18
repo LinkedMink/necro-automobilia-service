@@ -1,28 +1,31 @@
 #/bin/sh
 
+IMAGE_NAME="necro-automobilia-service"
+
+if [ -z "$DOCKER_SCOPE" ]; then
+  DOCKER_SCOPE="linkedmink/" 
+fi
+
 if [ -z "$DOCKER_REGISTRY" ]; then
   DOCKER_REGISTRY="linkedmink.azurecr.io/" 
 fi
 
 npm run containerize
 
-sleep 1
-
 docker tag \
-  linkedmink/necro-automobilia-service \
-  "${DOCKER_REGISTRY}linkedmink/necro-automobilia-service"
+  "${DOCKER_SCOPE}${IMAGE_NAME}" \
+  "${DOCKER_REGISTRY}${DOCKER_SCOPE}${IMAGE_NAME}"
 
-sleep 1
-
-docker push "${DOCKER_REGISTRY}linkedmink/necro-automobilia-service"
-
-sleep 1
+docker push "${DOCKER_REGISTRY}${DOCKER_SCOPE}${IMAGE_NAME}"
 
 kubectl set image \
-  deployment/necro-automobilia-service \
-  necro-automobilia-service="${DOCKER_REGISTRY}linkedmink/necro-automobilia-service:latest" \
+  "deployment/${IMAGE_NAME}" \
+  $IMAGE_NAME="${DOCKER_REGISTRY}${DOCKER_SCOPE}${IMAGE_NAME}:latest" \
   --record
 
-sleep 1
+kubectl set image \
+  "deployment/${IMAGE_NAME}" \
+  $IMAGE_NAME="${DOCKER_REGISTRY}${DOCKER_SCOPE}${IMAGE_NAME}" \
+  --record
 
-kubectl rollout status deployment/necro-automobilia-service
+kubectl rollout status "deployment/${IMAGE_NAME}"

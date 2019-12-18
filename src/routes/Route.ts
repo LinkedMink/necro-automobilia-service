@@ -3,22 +3,45 @@ import { Router } from "express";
 import { ParamsDictionary, Request, Response } from "express-serve-static-core";
 
 import { objectDescriptorBodyVerify } from "../infastructure/ObjectDescriptor";
-import { authorizeJwtClaim } from "../middleware/Authorization";
+import { AuthorizationClaim, authorizeJwtClaim } from "../middleware/Authorization";
 import { getResponseSuccess } from "../models/IResponseData";
-import { IRouteRiskModel } from "../models/IRouteRiskModel";
+import { IRouteRiskModel, ISegmentRiskModel } from "../models/IRouteRiskModel";
 import { IRouteRequest, routeRequestDescriptor } from "../models/requests/IRouteRequest";
+import { getHaversineDistance } from "../shared/Geospatial";
 
 export const routeRouter = Router();
 
+const getRandomMicromorts = () => {
+  return (Math.random() / 5) + 1 / 10000;
+};
+
 const getMockResponse = (reqData: IRouteRequest): IRouteRiskModel => {
-  const distance = (Math.random() * 100);
-  const micromortsPerUnit = (Math.random() / 5) + 1 / 10000;
+  let distance = 0;
+  let totalMicromorts = 0;
+  const segments: ISegmentRiskModel[] = [];
+
+  let lastPoint = reqData.route[0];
+  for (let i = 1; i < reqData.route.length; i++) {
+    const segment = {
+      start: lastPoint,
+      distance: getHaversineDistance(lastPoint, reqData.route[i]),
+      micromorts: getRandomMicromorts(),
+    };
+
+    distance += segment.distance;
+    totalMicromorts += segment.micromorts;
+    segments.push(segment);
+
+    lastPoint = reqData.route[i];
+  }
+
   return {
     source: reqData.source,
     destination: reqData.destination,
     distance,
-    totalMicromorts: micromortsPerUnit * distance,
-    averageMicromorts: micromortsPerUnit,
+    totalMicromorts,
+    averageMicromorts: totalMicromorts / distance,
+    segments,
     modelCalculatedOn: new Date(),
   };
 };
@@ -33,8 +56,8 @@ const getMockResponse = (reqData: IRouteRequest): IRouteRiskModel => {
  *       200:
  *         description: The request was successful.
  */
-routeRouter.get("/",
-  authorizeJwtClaim(),
+routeRouter.post("/",
+  authorizeJwtClaim([AuthorizationClaim.NecroAutomobiliaUser]),
   objectDescriptorBodyVerify(routeRequestDescriptor, false),
   async (req: Request<ParamsDictionary, any, any>, res: Response) => {
 

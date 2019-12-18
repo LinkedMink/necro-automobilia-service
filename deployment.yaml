@@ -17,6 +17,7 @@ spec:
       containers:
       - name: necro-automobilia-service
         image: linkedmink/necro-automobilia-service
+        imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
         env:
@@ -30,6 +31,10 @@ spec:
           value: "client.[Your Domain]"
         - name: JWT_ISSUER
           value: "api.[Your Domain]"
+        - name: NODE_MAILER_TRANSPORT
+          value: '{"service": "gmail", "auth": {"user": "[YOUR EMAIL]", "pass": "[YOUR KEY]"}}'
+        - name: SHARE_UI_URL
+          value: "https://[Your Host]/"
 ---
 apiVersion: v1
 kind: Service

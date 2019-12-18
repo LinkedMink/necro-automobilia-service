@@ -1,5 +1,3 @@
-import { Router } from "express";
-
 import { createCrudRouter } from "../infastructure/CreateCrudRouter";
 import { AuthorizationClaim, authorizeJwtClaim } from "../middleware/Authorization";
 import { accidentConverter } from "../models/converters/AccidentConverter";

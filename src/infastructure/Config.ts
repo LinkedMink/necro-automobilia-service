@@ -11,6 +11,7 @@ export enum Environment {
 }
 
 export enum ConfigKey {
+  AppName = "APP_NAME",
   AllowedOrigins = "ALLOWED_ORIGINS",
   JwtAudience = "JWT_AUDIENCE",
   JwtIssuer = "JWT_ISSUER",
@@ -20,14 +21,23 @@ export enum ConfigKey {
   LogFile = "LOG_FILE",
   LogLevel = "LOG_LEVEL",
   MongoDbConnectionString = "MONGO_DB_CONNECTION_STRING",
+
+  SystemEmailAddress = "SYSTEM_EMAIL_ADDRESS",
+  NodeMailerTransport = "NODE_MAILER_TRANSPORT",
+  ShareUiUrl = "SHARE_UI_URL",
 }
 
 const configDefaultMap: Map<ConfigKey, string | undefined> = new Map([
+  [ConfigKey.AppName, "LinkedMink"],
   [ConfigKey.AllowedOrigins, "*"],
   [ConfigKey.JwtSigningAlgorithm, "RS256"],
   [ConfigKey.ListenPort, "8080"],
   [ConfigKey.LogFile, "combined.log"],
   [ConfigKey.LogLevel, "info"],
+
+  [ConfigKey.SystemEmailAddress, "noreply@linkedmink.space"],
+  [ConfigKey.NodeMailerTransport, ""],
+  [ConfigKey.ShareUiUrl, "http://localhost/shared"],
 ]);
 
 if (process.env.NODE_ENV === Environment.Test) {

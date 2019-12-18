@@ -1,37 +1,34 @@
 import { ObjectAttribute, ObjectDescriptor } from "../../infastructure/ObjectDescriptor";
 
+import { ShareEventType } from "../database/ShareEvent";
+
 /**
  * @swagger
  * definitions:
- *   IRouteRequest:
+ *   IShareRequest:
  *     type: object
  *     properties:
- *       source:
+ *       type:
  *         type: string
- *       destination:
+ *       sharedWith:
+ *         type: string
+ *       data:
  *         type: string
  *     required:
- *       - source
- *       - destination
+ *       - type
+ *       - sharedWith
+ *       - data
  */
 export interface IShareRequest {
-  source: number[];
-  destination: number[];
+  type: ShareEventType;
+  sharedWith: string[];
+  data: any;
 }
 
 export const shareRequestDescriptor = new ObjectDescriptor<IShareRequest>(
   {
-    source: [ObjectAttribute.Required],
-    destination: [ObjectAttribute.Required],
-  },
-  false,
-  (toSanitize: IShareRequest) => {
-    if (toSanitize.source) {
-      toSanitize.source = JSON.parse(toSanitize.source as unknown as string);
-    }
-    if (toSanitize.destination) {
-      toSanitize.destination = JSON.parse(toSanitize.destination as unknown as string);
-    }
-    return toSanitize;
+    type: [ObjectAttribute.Required],
+    sharedWith: [ObjectAttribute.Required],
+    data: [ObjectAttribute.Required],
   },
 );
