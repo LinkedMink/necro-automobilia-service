@@ -25,6 +25,7 @@ export enum ConfigKey {
   SystemEmailAddress = "SYSTEM_EMAIL_ADDRESS",
   NodeMailerTransport = "NODE_MAILER_TRANSPORT",
   ShareUiUrl = "SHARE_UI_URL",
+  ShareExpirationDays = "SHARE_EXPIRATION_DAYS",
 }
 
 const configDefaultMap: Map<ConfigKey, string | undefined> = new Map([
@@ -38,6 +39,7 @@ const configDefaultMap: Map<ConfigKey, string | undefined> = new Map([
   [ConfigKey.SystemEmailAddress, "noreply@linkedmink.space"],
   [ConfigKey.NodeMailerTransport, ""],
   [ConfigKey.ShareUiUrl, "http://localhost/shared"],
+  [ConfigKey.ShareExpirationDays, "90"],
 ]);
 
 if (process.env.NODE_ENV === Environment.Test) {

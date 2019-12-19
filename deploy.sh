@@ -20,12 +20,11 @@ docker push "${DOCKER_REGISTRY}${DOCKER_SCOPE}${IMAGE_NAME}"
 
 kubectl set image \
   "deployment/${IMAGE_NAME}" \
-  $IMAGE_NAME="${DOCKER_REGISTRY}${DOCKER_SCOPE}${IMAGE_NAME}:latest" \
-  --record
+  $IMAGE_NAME="${DOCKER_REGISTRY}${DOCKER_SCOPE}${IMAGE_NAME}"
 
 kubectl set image \
   "deployment/${IMAGE_NAME}" \
-  $IMAGE_NAME="${DOCKER_REGISTRY}${DOCKER_SCOPE}${IMAGE_NAME}" \
+  $IMAGE_NAME="${DOCKER_REGISTRY}${DOCKER_SCOPE}${IMAGE_NAME}:latest" \
   --record
 
 kubectl rollout status "deployment/${IMAGE_NAME}"

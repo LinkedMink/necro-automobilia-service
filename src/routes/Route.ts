@@ -58,10 +58,10 @@ const getMockResponse = (reqData: IRouteRequest): IRouteRiskModel => {
  */
 routeRouter.post("/",
   authorizeJwtClaim([AuthorizationClaim.NecroAutomobiliaUser]),
-  objectDescriptorBodyVerify(routeRequestDescriptor, false),
+  objectDescriptorBodyVerify(routeRequestDescriptor),
   async (req: Request<ParamsDictionary, any, any>, res: Response) => {
 
-  const reqData = req.query as IRouteRequest;
+  const reqData = req.body as IRouteRequest;
   const mockResponse = getMockResponse(reqData);
 
   return res.send(getResponseSuccess(mockResponse));
