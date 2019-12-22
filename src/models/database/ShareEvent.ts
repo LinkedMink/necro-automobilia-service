@@ -1,18 +1,14 @@
 import { model, Schema, SchemaTypes, Types } from "mongoose";
 
-import { ITrackedEntity, trackedEntityPreValidateFunc, trackedEntitySchemaDefinition } from "./TrackedEntity";
+import { trackedEntityPreValidateFunc } from "./TrackedEntity";
+import { IUserEntity, userEntitySchemaDefinition } from "./UserEntity";
 
 export enum ShareEventType {
   Route = "ROUTE",
   Accident = "ACCIDENT",
 }
 
-const schemaDefinition = Object.assign({}, trackedEntitySchemaDefinition, {
-  userId: {
-    type: SchemaTypes.ObjectId,
-    required: true,
-    index: true,
-  },
+const schemaDefinition = Object.assign({}, userEntitySchemaDefinition, {
   accessKey: {
     type: SchemaTypes.String,
     required: true,
@@ -42,8 +38,7 @@ const schemaDefinition = Object.assign({}, trackedEntitySchemaDefinition, {
 const shareEventSchema = new Schema(schemaDefinition);
 shareEventSchema.pre("validate", trackedEntityPreValidateFunc);
 
-export interface IShareEvent extends ITrackedEntity {
-  userId: string;
+export interface IShareEvent extends IUserEntity {
   accessKey: string;
   expireDate: Date;
   type: ShareEventType;

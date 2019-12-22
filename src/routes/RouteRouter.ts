@@ -11,6 +11,13 @@ import { getHaversineDistance } from "../shared/Geospatial";
 
 export const routeRouter = Router();
 
+const KM_PER_MILE = 0.621371;
+
+const getRandomRecentDate = () => {
+  const upTo48Hours = Math.random() * 1000 * 60 * 60 * 48;
+  return new Date(Date.now() - upTo48Hours);
+};
+
 const getRandomMicromorts = () => {
   return (Math.random() / 5) + 1 / 10000;
 };
@@ -22,10 +29,11 @@ const getMockResponse = (reqData: IRouteRequest): IRouteRiskModel => {
 
   let lastPoint = reqData.route[0];
   for (let i = 1; i < reqData.route.length; i++) {
+    const segmentDistance = getHaversineDistance(lastPoint, reqData.route[i]);
     const segment = {
       start: lastPoint,
-      distance: getHaversineDistance(lastPoint, reqData.route[i]),
-      micromorts: getRandomMicromorts(),
+      distance: segmentDistance,
+      micromorts: getRandomMicromorts() * segmentDistance * KM_PER_MILE,
     };
 
     distance += segment.distance;
@@ -42,7 +50,7 @@ const getMockResponse = (reqData: IRouteRequest): IRouteRiskModel => {
     totalMicromorts,
     averageMicromorts: totalMicromorts / distance,
     segments,
-    modelCalculatedOn: new Date(),
+    modelCalculatedOn: getRandomRecentDate(),
   };
 };
 

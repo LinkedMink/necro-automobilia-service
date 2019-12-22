@@ -8,13 +8,13 @@ import { connectSingletonDatabase } from "./infastructure/Database";
 import { corsMiddleware } from "./middleware/Cors";
 import { errorMiddleware } from "./middleware/Error";
 import { addJwtStrategy } from "./middleware/Passport";
-import { accidentRouter } from "./routes/Accident";
-import { feedEventRouter } from "./routes/FeedEvent";
-import { pingRouter } from "./routes/Ping";
-import { routeRouter } from "./routes/Route";
-import { shareRouter } from "./routes/Share";
-import { shareEventRouter } from "./routes/ShareEvent";
-import { swaggerRouter } from "./routes/Swagger";
+import { accidentRouter } from "./routes/AccidentRouter";
+import { feedEventRouter } from "./routes/FeedEventRouter";
+import { pingRouter } from "./routes/PingRouter";
+import { routeRouter } from "./routes/RouteRouter";
+import { shareEventRouter } from "./routes/ShareEventRouter";
+import { shareRouter } from "./routes/ShareRouter";
+import { swaggerRouter } from "./routes/SwaggerRouter";
 
 connectSingletonDatabase();
 
