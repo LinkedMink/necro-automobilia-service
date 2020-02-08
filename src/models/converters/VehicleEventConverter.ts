@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IVehicleEvent } from "../database/VehicleEvent";
 import { IVehicleEventModel } from "../IVehicleEventModel";
 import { IModelConverter } from "./IModelConverter";

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IPerson } from "../database/Person";
 import { IPersonModel } from "../IPersonModel";
 import { IModelConverter } from "./IModelConverter";

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IViolation } from "../database/Violation";
 import { IViolationModel } from "../IViolationModel";
 import { IModelConverter } from "./IModelConverter";

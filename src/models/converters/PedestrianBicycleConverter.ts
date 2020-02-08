@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IPedestrianBicycle } from "../database/PedestrianBicycle";
 import { IPedestrianBicycleModel } from "../IPedestrianBicycleModel";
 import { IModelConverter } from "./IModelConverter";

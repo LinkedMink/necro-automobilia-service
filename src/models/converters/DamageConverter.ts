@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IDamage } from "../database/Damage";
 import { IDamageModel } from "../IDamageModel";
 import { IModelConverter } from "./IModelConverter";

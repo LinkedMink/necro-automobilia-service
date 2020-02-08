@@ -1,4 +1,4 @@
-import { model, Schema, SchemaTypes, Types } from "mongoose";
+import { model, Schema, SchemaTypes } from "mongoose";
 
 import { ITrackedEntity, trackedEntityPreValidateFunc, trackedEntitySchemaDefinition } from "./TrackedEntity";
 

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { INonMotoristSafetyEquipment } from "../database/NonMotoristSafetyEquipment";
 import { INonMotoristSafetyEquipmentModel } from "../INonMotoristSafetyEquipmentModel";
 import { IModelConverter } from "./IModelConverter";

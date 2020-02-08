@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IAccident } from "../database/Accident";
 import { IAccidentModel } from "../IAccidentModel";
 import { crashEventConverter } from "./CrashEventConverter";

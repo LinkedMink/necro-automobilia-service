@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import { Types } from "mongoose";
 
 import { IShareEvent } from "../database/ShareEvent";
@@ -7,7 +8,7 @@ import { IModelConverter, mapTrackedEntity, setUserModifier } from "./IModelConv
 export class ShareEventConverter implements IModelConverter<IShareEventModel, IShareEvent> {
   public convertToFrontend = (model: IShareEvent): IShareEventModel => {
     let returnModel: IShareEventModel = {
-      userId: model.userId,
+      userId: model.userId.toString(),
       accessKey: model.accessKey,
       expireDate: model.expireDate,
       type: model.type,
@@ -41,7 +42,7 @@ export class ShareEventConverter implements IModelConverter<IShareEventModel, IS
       sharedWith.push(e);
     });
 
-    returnModel.userId = model.userId;
+    returnModel.userId = new ObjectId(model.userId);
     returnModel.accessKey = model.accessKey;
     returnModel.expireDate = model.expireDate;
     returnModel.type = model.type;

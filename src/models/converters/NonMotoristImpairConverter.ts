@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { INonMotoristImpair } from "../database/NonMotoristImpair";
 import { INonMotoristImpairModel } from "../INonMotoristImpairModel";
 import { IModelConverter } from "./IModelConverter";

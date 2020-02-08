@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IVehicleCrash } from "../database/VehicleCrash";
 import { IVehicleCrashModel } from "../IVehicleCrashModel";
 import { damageConverter } from "./DamageConverter";

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IVehicleDetail } from "../database/VehicleDetail";
 import { IVehicleDetailModel } from "../IVehicleDetailModel";
 import { IModelConverter } from "./IModelConverter";

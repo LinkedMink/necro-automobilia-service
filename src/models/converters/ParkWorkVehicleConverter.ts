@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IParkWorkVehicle } from "../database/ParkWorkVehicle";
 import { IParkWorkVehicleModel } from "../IParkWorkVehicleModel";
 import { IModelConverter } from "./IModelConverter";

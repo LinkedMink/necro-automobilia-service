@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IManeuver } from "../database/Maneuver";
 import { IManeuverModel } from "../IManeuverModel";
 import { IModelConverter } from "./IModelConverter";

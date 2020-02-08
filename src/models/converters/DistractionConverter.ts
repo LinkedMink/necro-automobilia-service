@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IDistraction } from "../database/Distraction";
 import { IDistractionModel } from "../IDistractionModel";
 import { IModelConverter } from "./IModelConverter";

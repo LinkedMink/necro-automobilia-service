@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IDriverImpair } from "../database/DriverImpair";
 import { IDriverImpairModel } from "../IDriverImpairModel";
 import { IModelConverter } from "./IModelConverter";

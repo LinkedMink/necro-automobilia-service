@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IVisionObstruction } from "../database/VisionObstruction";
 import { IVisionObstructionModel } from "../IVisionObstructionModel";
 import { IModelConverter } from "./IModelConverter";

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IPoint } from "../database/Point";
 import { IPointModel } from "../IPointModel";
 import { IModelConverter } from "./IModelConverter";

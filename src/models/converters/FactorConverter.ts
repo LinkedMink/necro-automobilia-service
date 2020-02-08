@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IFactor } from "../database/Factor";
 import { IFactorModel } from "../IFactorModel";
 import { IModelConverter } from "./IModelConverter";
