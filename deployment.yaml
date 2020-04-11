@@ -13,7 +13,7 @@ spec:
         app: necro-automobilia-service
     spec:
       nodeSelector:
-        "beta.kubernetes.io/os": linux
+        "kubernetes.io/os": linux
       containers:
       - name: necro-automobilia-service
         image: linkedmink/necro-automobilia-service
@@ -35,6 +35,7 @@ spec:
           value: '{"service": "gmail", "auth": {"user": "[YOUR EMAIL]", "pass": "[YOUR KEY]"}}'
         - name: SHARE_UI_URL
           value: "https://[Your Host]/"
+
 ---
 apiVersion: v1
 kind: Service
