@@ -29,7 +29,7 @@ export const shareRouter = Router();
 shareRouter.post("/",
   authorizeJwtClaim([AuthorizationClaim.NecroAutomobiliaUser]),
   objectDescriptorBodyVerify(shareRequestDescriptor),
-  async (req: Request<ParamsDictionary, any, any>, res: Response) => {
+  async (req: Request<ParamsDictionary>, res: Response) => {
 
   const user = req.user as IJwtPayload;
   const reqData = req.body as IShareRequest;

@@ -13,12 +13,12 @@ export const routeRouter = Router();
 
 const KM_PER_MILE = 0.621371;
 
-const getRandomRecentDate = () => {
+const getRandomRecentDate = (): Date => {
   const upTo48Hours = Math.random() * 1000 * 60 * 60 * 48;
   return new Date(Date.now() - upTo48Hours);
 };
 
-const getRandomMicromorts = () => {
+const getRandomMicromorts = (): number => {
   return (Math.random() / 5) + 1 / 10000;
 };
 
@@ -67,7 +67,7 @@ const getMockResponse = (reqData: IRouteRequest): IRouteRiskModel => {
 routeRouter.post("/",
   authorizeJwtClaim([AuthorizationClaim.NecroAutomobiliaUser]),
   objectDescriptorBodyVerify(routeRequestDescriptor),
-  (req: Request<ParamsDictionary, any, any>, res: Response) => {
+  (req: Request<ParamsDictionary>, res: Response) => {
 
   const reqData = req.body as IRouteRequest;
   const mockResponse = getMockResponse(reqData);

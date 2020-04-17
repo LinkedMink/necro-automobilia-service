@@ -8,5 +8,5 @@ export interface IShareEventModel extends ITrackedEntityModel {
   type: ShareEventType;
   sharedBy: string;
   sharedWith: string[];
-  data: any;
+  data: unknown;
 }

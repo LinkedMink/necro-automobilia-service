@@ -1,6 +1,6 @@
 import { Schema, SchemaTypes, Types } from "mongoose";
 
-export const validateCoordinates = (coordinates: number[]) => {
+export const validateCoordinates = (coordinates: number[]): boolean => {
   return coordinates[0] >= -180 &&
     coordinates[0] <= 180 &&
     coordinates[1] >= -90 &&

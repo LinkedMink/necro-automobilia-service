@@ -19,6 +19,7 @@ export class FeedEventConverter implements IModelConverter<IFeedEventModel, IFee
     existing?: IFeedEvent | undefined,
     modifier?: string): IFeedEvent => {
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let tempReturnModel: any = {};
     if (existing) {
       tempReturnModel = existing;

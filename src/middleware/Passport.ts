@@ -14,7 +14,7 @@ export interface IJwtPayload {
   sub: string;
 }
 
-export const addJwtStrategy = (passport: PassportStatic) => {
+export const addJwtStrategy = (passport: PassportStatic): void => {
   const options: JwtStrategyOptions = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
     secretOrKey: config.getFileBuffer(ConfigKey.JwtSecretKeyFile),

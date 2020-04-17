@@ -22,7 +22,7 @@ import { ShareEventType } from "../database/ShareEvent";
 export interface IShareRequest {
   type: ShareEventType;
   sharedWith: string[];
-  data: any;
+  data: unknown;
 }
 
 export const shareRequestDescriptor = new ObjectDescriptor<IShareRequest>(

@@ -27,6 +27,7 @@ export class ShareEventConverter implements IModelConverter<IShareEventModel, IS
     existing?: IShareEvent | undefined,
     modifier?: string): IShareEvent => {
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let tempReturnModel: any = {};
     if (existing) {
       tempReturnModel = existing;

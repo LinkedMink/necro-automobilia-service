@@ -44,7 +44,7 @@ export interface IShareEvent extends IUserEntity {
   type: ShareEventType;
   sharedBy: string;
   sharedWith: Types.Array<string>;
-  data: any;
+  data: unknown;
 }
 
 export const ShareEvent = model<IShareEvent>("ShareEvent", shareEventSchema);
