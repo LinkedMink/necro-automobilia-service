@@ -1,3 +1,16 @@
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: jwt-public-key
+type: Opaque
+stringData:
+  jwtRS256.key: |-
+    -----BEGIN RSA PUBLIC KEY-----
+    ... my public key ...
+    -----END RSA PUBLIC KEY-----
+
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -14,12 +27,21 @@ spec:
     spec:
       nodeSelector:
         "kubernetes.io/os": linux
+      volumes:
+      - name: jwt-public-key
+        secret:
+          secretName: jwt-public-key
       containers:
       - name: necro-automobilia-service
         image: linkedmink/necro-automobilia-service
         imagePullPolicy: "Always"
         ports:
         - containerPort: 8080
+        volumeMounts:
+        - name: jwt-public-key
+          mountPath: /usr/src/app/jwtRS256.key.pub
+          subPath: jwtRS256.key.pub
+          readOnly: true
         env:
         - name: ALLOWED_ORIGINS
           value: '["https://[Your Host]"]'

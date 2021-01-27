@@ -18,6 +18,7 @@ export enum ConfigKey {
   ListenPort = "LISTEN_PORT",
   LogFile = "LOG_FILE",
   LogLevel = "LOG_LEVEL",
+  IsSwaggerEnabled = "IS_SWAGGER_ENABLED",
   MongoDbConnectionString = "MONGO_DB_CONNECTION_STRING",
 
   SystemEmailAddress = "SYSTEM_EMAIL_ADDRESS",
@@ -33,6 +34,7 @@ const configDefaultMap: Map<ConfigKey, string | undefined> = new Map([
   [ConfigKey.ListenPort, "8080"],
   [ConfigKey.LogFile, "combined.log"],
   [ConfigKey.LogLevel, "info"],
+  [ConfigKey.IsSwaggerEnabled, String(true)],
 
   [ConfigKey.SystemEmailAddress, "noreply@linkedmink.space"],
   [ConfigKey.NodeMailerTransport, ""],
