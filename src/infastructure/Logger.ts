@@ -1,5 +1,7 @@
+import { NextFunction, Request, RequestHandler, Response } from "express";
+import { ParamsDictionary } from "express-serve-static-core";
 import winston, { LoggerOptions } from "winston";
-import TransportStream from 'winston-transport'
+import TransportStream from "winston-transport";
 
 import { config, ConfigKey } from "./Config";
 
@@ -7,7 +9,7 @@ import { config, ConfigKey } from "./Config";
  * Expose the logger constructor, so that output can be customized
  */
 export class Logger {
-  static GLOBAL_LABEL = "AppGlobalLogger"
+  static GLOBAL_LABEL = "AppGlobalLogger";
 
   static get options(): LoggerOptions {
     return Logger.optionsValue;
@@ -15,7 +17,7 @@ export class Logger {
 
   /**
    * Change the options before constructing a logger. A logger will use the options
-   * set at the time the first get() is called for a specific label 
+   * set at the time the first get() is called for a specific label
    */
   static set options(options: LoggerOptions) {
     Logger.optionsValue = options;
@@ -32,47 +34,77 @@ export class Logger {
     }
 
     return winston.loggers.get(label);
-  };
+  }
 
   private static optionsValue: LoggerOptions;
 }
 
-const transports: TransportStream[] = []
+export const getRequestLoggerHandler = (): RequestHandler => {
+  const logger = Logger.get("Request");
 
-if (!config.isEnvironmentUnitTest) {
-  transports.push(new winston.transports.Console({
-    format: winston.format.simple()
-  }));
-}
+  return (
+    req: Request<ParamsDictionary>,
+    res: Response,
+    next: NextFunction
+  ): void => {
+    const start = Date.now();
+    logger.http(`Start ${req.method} ${req.originalUrl}`);
 
-if (!config.isEnvironmentContainerized) {
-  transports.push(new winston.transports.File({ 
-    filename: config.getString(ConfigKey.LogFile),
-    format: winston.format.json() 
-  }));
-}
+    next();
 
-const options = {
-  level: config.getString(ConfigKey.LogLevel),
-  defaultMeta: { service: config.packageJson.name },
-  transports,
-} as LoggerOptions;
+    const elapsed = Date.now() - start;
+    logger.http(
+      `Ended ${req.method} ${req.originalUrl} ${res.statusCode} ${elapsed} ms`
+    );
+  };
+};
 
-Logger.options = options
+const initLogger = (): void => {
+  const transports: TransportStream[] = [];
+  const format = winston.format.combine(
+    winston.format.errors({ stack: true }),
+    winston.format.colorize(),
+    winston.format.label(),
+    winston.format.timestamp(),
+    winston.format.printf(info => {
+      const label = info.label ? ` ${info.label}` : "";
+      const stack = (info.stack as string) ?? "";
+      return `${info.timestamp} ${info.level}${label}: ${info.message}${stack}`;
+    })
+  );
 
-process.on("unhandledRejection", (reason, p) => {
-  const logger = Logger.get();
-
-  let errorMessage = `Unhandled Rejection at: Promise: ${p}`;
-
-  const error = reason as Error;
-  if (error.message) {
-    errorMessage += `, message: ${error.message}`;
+  if (!config.isEnvironmentUnitTest) {
+    transports.push(
+      new winston.transports.Console({
+        format,
+      })
+    );
   }
 
-  if (error.stack) {
-    errorMessage += `, stack: ${error.stack}`;
+  if (!config.isEnvironmentContainerized) {
+    transports.push(
+      new winston.transports.File({
+        filename: config.getString(ConfigKey.LogFile),
+        format,
+      })
+    );
   }
 
-  logger.warn(errorMessage);
-});
+  const options = {
+    level: config.getString(ConfigKey.LogLevel),
+    // defaultMeta: { service: config.packageJson.name, version: config.packageJson.version },
+    transports,
+  } as LoggerOptions;
+
+  Logger.options = options;
+
+  process.on("unhandledRejection", (error, p) => {
+    const logger = Logger.get("unhandledRejection");
+
+    if (error) {
+      logger.error(error);
+    }
+  });
+};
+
+export { initLogger };

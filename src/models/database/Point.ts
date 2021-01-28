@@ -7,7 +7,7 @@ export const validateCoordinates = (coordinates: number[]): boolean => {
     coordinates[1] <= 90;
 };
 
-const schemaDefinition = new Schema({
+const schemaDefinition = {
   type: {
     type: SchemaTypes.String,
     enum: ["Point"],
@@ -15,10 +15,10 @@ const schemaDefinition = new Schema({
   },
   coordinates: {
     type: [SchemaTypes.Number],
-    validate: [validateCoordinates, "-180 <= Longitude <= 180, -90 <= <= 90"],
+    //validate: [validateCoordinates, "-180 <= Longitude <= 180, -90 <= <= 90"],
     required: true,
   },
-});
+};
 
 export const pointSchema = new Schema(schemaDefinition);
 
